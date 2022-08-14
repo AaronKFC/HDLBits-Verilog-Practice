@@ -6,7 +6,7 @@ module top_module(
         out = 0;
         for(int i = 0; i < 255; i++) begin
             if(in[i])
-                out = out + 1;
+                out = out + 1;  // 寫成 out+=1; 也可以
             else
                 out = out + 0;
         end
