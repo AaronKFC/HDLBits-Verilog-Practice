@@ -4,7 +4,7 @@ module top_module (
     output reg [2:0] pos  );
 
     always @(*) begin
-        casez(in)
+        casez(in)  //注意是casez，不是case。
             8'bzzzzzzz1 : pos = 0;
             8'bzzzzzz1z : pos = 1;
             8'bzzzzz1zz : pos = 2;

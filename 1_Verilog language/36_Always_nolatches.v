@@ -13,7 +13,7 @@ module top_module (
             16'he072 : down = 1;
             16'he074 : right = 1;
             16'he075 : up = 1;
-            default : ;
+            default : ;   //因為有將四個方向均設值0，所以default變得可有可無。
         endcase
     end
 

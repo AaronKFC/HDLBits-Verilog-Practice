@@ -21,6 +21,7 @@ module top_module (
             4'b1101 : pos = 0;
             4'b1110 : pos = 1;
             4'b1111 : pos = 0;
+            // default : pos = 0;  //這裡沒加default也會對，但習慣上建議加。
         endcase
     end
 
