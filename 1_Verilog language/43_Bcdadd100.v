@@ -10,7 +10,7 @@ module top_module(
     
     generate
         genvar i;
-        for(i = 4; i < 400; i=i+4) begin : adder
+        for(i = 4; i < 400; i=i+4) begin : adder  //adder換寫成adder_gen也可以。
             bcd_fadd fadd(.a(a[i+3:i]), .b(b[i+3:i]), .cin(cout_tmp[i-4]), .cout(cout_tmp[i]),.sum(sum[i+3:i]));
         end
     endgenerate
