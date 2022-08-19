@@ -3,6 +3,8 @@ module top_module(
     input [7:0] sel,
     output out );
     
-    assign out = in[sel];
+    // Select one bit from vector in[]. The bit being selected can be variable.
+    assign out = in[sel];  //注意不是assign out = sel & in;
+
 
 endmodule
