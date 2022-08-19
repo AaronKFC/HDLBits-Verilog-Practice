@@ -7,7 +7,8 @@ module top_module (
 );
     
     always @(posedge clk) begin
-        if(!resetn) begin
+        //resetn is a synchronous, active-low reset.
+        if(!resetn) begin   //注意是 !resetn，不是 resetn
             q <= 0;
         end
         else begin
