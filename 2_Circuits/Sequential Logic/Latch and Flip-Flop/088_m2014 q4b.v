@@ -4,7 +4,7 @@ module top_module (
     input ar,   // asynchronous reset
     output q);
 
-    always @(posedge clk or posedge ar) begin
+    always @(posedge clk or posedge ar) begin  
         if(ar) begin
             q <= 0;
         end

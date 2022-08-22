@@ -4,6 +4,12 @@ module top_module (
     output Q
 );
     
+    //Solution1 (My implementation)
+    always @(posedge clk) begin
+        Q <= (L) ? R : (E) ? w : Q;
+    end
+
+    //Solution2 
     reg tmp;
     //not use <=
     always @(posedge clk) begin
