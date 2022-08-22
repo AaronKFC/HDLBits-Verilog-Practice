@@ -5,6 +5,25 @@ module top_module(
     input k,
     output out); //  
 
+    // Solution1 (My implementation) (almost the same as Solution2)
+    parameter OFF=0, ON=1;
+    reg state, next_s;
+    
+    always @(*) begin
+        case(state)
+            OFF: next_s <= j ? ON:OFF;
+            ON: next_s <= k ? OFF:ON;
+        endcase
+    end
+    
+    always @(posedge clk) begin
+        if(reset) state <=OFF;
+        else state <= next_s;
+    end
+    assign out = (state == ON);
+
+    ///////////////////////////////////////////////
+    // Solution2
     parameter OFF = 0, ON = 1; 
     reg state, next_state;
 
