@@ -12,6 +12,16 @@ module top_module(
     assign next_state[C] = state[B] & (~in) | state[D] & (~in);
     assign next_state[D] = state[C] & (in);
 
+    // 注意，如下寫法是錯的：
+    always @(*) begin
+        case(state)
+            4'b0001: next_state <= in ? B : A;
+            4'b0010: next_state <= in ? B : C;
+            4'b0100: next_state <= in ? D : A;
+            4'b1000: next_state <= in ? B : C;
+        endcase
+    end
+
     // Output logic: 
     assign out = (state[D] == 1);
 

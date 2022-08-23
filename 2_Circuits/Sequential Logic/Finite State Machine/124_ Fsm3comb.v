@@ -15,8 +15,18 @@ module top_module(
             D: next_state <= in ? B : C;
         endcase
     end
-
+    
     // Output logic:  out = f(state) for a Moore state machine
+
+    // 寫法一：
     assign out = (state == D);
+
+    // 寫法二：
+    always @(*) begin
+        if(state==A) out=0;
+        else if (state==B) out=0;
+        else if (state==C) out=0;
+        else out=1;
+    end
 
 endmodule

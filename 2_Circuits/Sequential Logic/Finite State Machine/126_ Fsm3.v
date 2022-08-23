@@ -4,7 +4,7 @@ module top_module(
     input areset,
     output out); //
     
-    reg [2:0] state, next_state;
+    reg [1:0] state, next_state;      // 注意要給兩個bits以上。
     parameter A=1, B=2, C=3, D=4; 
     // State transition logic
     always @(*) begin

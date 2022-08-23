@@ -1,3 +1,5 @@
+
+// Solution1
 module top_module (
     input clk,
     input x,
@@ -11,5 +13,26 @@ module top_module (
         Q[2] = ~Q[2] | x;
         z = ~(Q[0] | Q[1] | Q[2]); 
     end
+
+endmodule
+
+
+// Solution2 (My implementation) 注意此題的always block裡，要用blocking，不能用non-blocking
+module top_module (
+    input clk,
+    input x,
+    output z
+); 
+	wire q1, q2, q3;  //因為q不是output，所以宣告成wire亦可
+    initial z=1;
+    always @(posedge clk) begin
+        // z=1; // wrong
+        q1 = x ^ q1;
+        q2 = x & ~q2;
+        q3 = x | ~q3;
+        //z = ~(q1 | q2 | q3);
+    end
+    
+    assign z = ~(q1 | q2 | q3);  //寫在這裡也可以
 
 endmodule
