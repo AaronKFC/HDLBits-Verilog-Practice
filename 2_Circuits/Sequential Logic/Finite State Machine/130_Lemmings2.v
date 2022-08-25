@@ -1,3 +1,45 @@
+
+// Solution1 (My implementation)
+module top_module(
+    input clk,
+    input areset,    // Freshly brainwashed Lemmings walk left.
+    input bump_left,
+    input bump_right,
+    input ground,
+    output walk_left,
+    output walk_right,
+    output aaah ); 
+	
+    parameter L=0, R=1, LA=2, RA=3;
+    reg [1:0] state, next;
+    
+    always @(*) begin
+        case(state)
+            L: next = ~ground ? LA : (bump_left ? R:L);
+            R: next = ~ground ? RA : (bump_right ? L:R);
+            LA: next = ~ground ? LA : L;
+            RA: next = ~ground ? RA : R;
+        endcase
+    end
+    
+    always @(posedge clk or posedge areset) begin 
+        if(areset) state <= L;
+        else state <= next;
+    end
+    
+    always @(*) begin
+        case(state)
+            L: {walk_left, walk_right, aaah} = 3'b100;
+            R: {walk_left, walk_right, aaah} = 3'b010;
+            LA: {walk_left, walk_right, aaah} = 3'b001;
+            RA: {walk_left, walk_right, aaah} = 3'b001;
+        endcase
+    end
+    
+endmodule
+
+
+// Solution2
 module top_module(
     input clk,
     input areset,    // Freshly brainwashed Lemmings walk left.

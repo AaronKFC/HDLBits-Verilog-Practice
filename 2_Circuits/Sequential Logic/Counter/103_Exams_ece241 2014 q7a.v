@@ -1,3 +1,33 @@
+// Solution1 (My implementation)
+module top_module (
+    input clk,
+    input reset,
+    input enable,
+    output [3:0] Q,
+    output c_enable,
+    output c_load,
+    output [3:0] c_d
+); //
+    
+	assign c_enable = enable;
+    assign c_d = c_load ? 1 : 0;
+    
+    always @(*) begin
+        if(reset || (Q == 12 && c_enable)) begin
+            //Q <= 1;
+            c_load <= 1;
+        end
+        else begin
+            c_load <= 0;
+        end
+    end
+    
+    count4 the_counter (clk, c_enable, c_load, c_d, Q);
+
+endmodule
+
+
+// Solution2
 module top_module (
     input clk,
     input reset,

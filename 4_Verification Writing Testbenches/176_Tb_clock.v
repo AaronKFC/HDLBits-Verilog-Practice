@@ -14,10 +14,9 @@ endmodule
 
 
 // Solution2
-module top_module ( );
-	parameter time_period = 10;
-    reg clock;
-    initial clock=0;
-    always #(time_period/2) clock=~clock;
-    dut dut1(clock);
+module top_module ();
+    reg clk;
+    dut dut1(clk);
+    initial clk = 0;
+    always #5 clk=~clk;
 endmodule
