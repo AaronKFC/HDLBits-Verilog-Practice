@@ -20,3 +20,39 @@ module top_module(
     assign out2 = state[7] | state[9];
 
 endmodule
+
+
+// 以下我的implementation不是題目要的，所以會出錯
+/* 
+以下為錯誤提示：
+# Hint: Your circuit passed when given only one-hot inputs, but not with two-hot inputs.
+# Hint: Your circuit passed when given only one-hot inputs, but not with random inputs.
+# Hint: Are you doing something more complicated than deriving state transition equations by inspection?
+*/
+module top_module(
+    input in,
+    input [9:0] state,
+    output [9:0] next_state,
+    output out1,
+    output out2);
+	
+    always @(*) begin 
+        case(state)
+            10'b0000000001: next_state = in ? 10'b0000000010 : 10'b0000000001;
+            10'b0000000010: next_state = in ? 10'b0000000100 : 10'b0000000001;
+            10'b0000000100: next_state = in ? 10'b0000001000 : 10'b0000000001;
+            10'b0000001000: next_state = in ? 10'b0000010000 : 10'b0000000001;
+            10'b0000010000: next_state = in ? 10'b0000100000 : 10'b0000000001;
+            10'b0000100000: next_state = in ? 10'b0001000000 : 10'b0100000000;
+            10'b0001000000: next_state = in ? 10'b0010000000 : 10'b1000000000;
+            10'b0010000000: next_state = in ? 10'b0010000000 : 10'b0000000001;
+            10'b0100000000: next_state = in ? 10'b0000000010 : 10'b0000000001;
+            10'b1000000000: next_state = in ? 10'b0000000010 : 10'b0000000001;
+            default: next_state = 0;
+        endcase
+    end
+    
+    assign out1 = state[8] | state[9];
+    assign out2 = state[7] | state[9];
+    
+endmodule
