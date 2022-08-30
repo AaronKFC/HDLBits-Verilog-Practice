@@ -1,3 +1,51 @@
+// Solution1 (My implementation)
+module top_module(
+	input clk,
+    input areset,
+    input bump_left,
+    input bump_right,
+    input ground,
+    input dig,
+    output walk_left,
+    output walk_right,
+    output aaah,
+    output digging);
+    
+    parameter L=0, R=1, LA=2, RA=3, LD=4, RD=5;
+    reg [2:0] state, next;
+    
+    always @(*) begin
+        case(state)
+            L : next = ~ground ? LA : (dig ? LD : (bump_left ? R:L));
+            R : next = ~ground ? RA : (dig ? RD : (bump_right ? L:R));
+            LA: next = ~ground ? LA : L;
+            RA: next = ~ground ? RA : R;
+            LD: next = ~ground ? LA : LD;
+            RD: next = ~ground ? RA : RD;
+        endcase
+    end
+    
+    always @(posedge clk or posedge areset) begin
+        if(areset) state <= L;
+        else state <= next;
+    end
+    
+    always @(*) begin 
+        case(state)
+            L : {walk_left, walk_right, aaah, digging} = 4'b1000;
+            R : {walk_left, walk_right, aaah, digging} = 4'b0100;
+            LA: {walk_left, walk_right, aaah, digging} = 4'b0010;
+            RA: {walk_left, walk_right, aaah, digging} = 4'b0010;
+            LD: {walk_left, walk_right, aaah, digging} = 4'b0001;
+            RD: {walk_left, walk_right, aaah, digging} = 4'b0001;
+        endcase
+    end
+    
+endmodule
+
+
+/////////////////////////////////////////////////////////////////
+// Solution2
 module top_module(
     input clk,
     input areset,    // Freshly brainwashed Lemmings walk left.
