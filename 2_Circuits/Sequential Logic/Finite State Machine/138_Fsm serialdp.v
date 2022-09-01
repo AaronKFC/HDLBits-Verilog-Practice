@@ -1,3 +1,7 @@
+// Solution1 參考：https://zhuanlan.zhihu.com/p/115935685
+
+
+// Solution2
 module top_module(
     input clk,
     input in,
