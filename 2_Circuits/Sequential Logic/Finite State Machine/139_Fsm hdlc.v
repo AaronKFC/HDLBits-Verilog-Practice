@@ -1,3 +1,44 @@
+// Solution1 (My implementation)
+module top_module(
+    input clk,
+    input reset,    // Synchronous reset
+    input in,
+    output disc,
+    output flag,
+    output err);
+	
+    parameter S0=0, S1=1, S2=2, S3=3, S4=4, S5=5, S6=6, DS=7, FL=8, ER=9;
+    reg [5:0] state, next;
+    
+    always @(*) begin
+        case(state)
+            S0: next = in ? S1:S0;
+            S1: next = in ? S2:S0;
+            S2: next = in ? S3:S0;
+            S3: next = in ? S4:S0;
+            S4: next = in ? S5:S0;
+            S5: next = in ? S6:DS;
+            S6: next = in ? ER:FL;
+            DS: next = in ? S1:S0;
+            FL: next = in ? S1:S0;
+            ER: next = in ? ER:S0;
+        endcase
+    end
+    
+    always @(posedge clk) begin
+        if(reset) state <= S0;
+        else state <= next;
+    end
+    
+    assign disc = (state==DS);
+    assign flag = (state==FL);
+    assign err = (state==ER);
+    
+endmodule
+
+
+
+// Solution2
 module top_module(
     input clk,
     input reset,    // Synchronous reset
