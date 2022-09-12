@@ -14,6 +14,7 @@ module top_module(
 endmodule
 
 
+
 // Solution2
 module top_module (
     input clk,
