@@ -16,3 +16,6 @@ module top_module (
     end
 
 endmodule
+
+
+// 注意，always中的output必须定义为reg型。

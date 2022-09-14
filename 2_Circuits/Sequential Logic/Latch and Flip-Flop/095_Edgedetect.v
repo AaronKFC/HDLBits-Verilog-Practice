@@ -14,6 +14,8 @@ module top_module(
 endmodule
 
 
+// 这是一个上升沿检测电路，大家要认真对待这个问题，招聘经常会问到。
+
 
 // Solution2
 module top_module (
